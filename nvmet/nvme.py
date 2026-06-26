@@ -83,7 +83,7 @@ class CFSNode(object):
         if not self.exists:
             try:
                 os.mkdir(self.path)
-            except:
+            except Exception:
                 raise CFSError("Could not create %s in configFS" %
                                self.__class__.__name__)
         self.get_enable()
@@ -109,7 +109,7 @@ class CFSNode(object):
 
         names = [os.path.basename(name).split('_', 1)[1]
                  for name in glob("%s/%s_*" % (self._path, group))
-                     if os.path.isfile(name)]
+                 if os.path.isfile(name)]
 
         if writable is True:
             names = [name for name in names
